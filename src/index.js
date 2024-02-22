@@ -46,13 +46,15 @@ function onSubmit(e) {
 
 function onClickBtn() {
   page += 1;
-  fetch(query, perPage, page).then(({ data }) => {
-    const totalPages = Math.ceil(data.totalHits / perPage);
-    if (page >= totalPages) {
-      btn.classList.add('is-hidden');
-      Notify.failure(
-        "We're sorry, but you've reached the end of search results."
-      );
-    }
-  });
+  fetch(query, perPage, page)
+    .then(({ data }) => {
+      const totalPages = Math.ceil(data.totalHits / perPage);
+      if (page >= totalPages) {
+        btn.classList.add('is-hidden');
+        Notify.failure(
+          "We're sorry, but you've reached the end of search results."
+        );
+      }
+    })
+    .catch(error => console.log(error));
 }
